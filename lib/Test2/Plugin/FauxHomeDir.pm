@@ -51,6 +51,12 @@ I expect that it should work on most other modern UNIX platforms.  It
 probably will not work on more esoteric systems like VMS or msys2.  
 Patches to address this will be eagerly accepted.
 
+=head1 CAVEATS
+
+Arguably your code shouldn't depend on or be affected by stuff in your 
+home directory, or have a hook for your tests to alternate configuration 
+files.
+
 =head1 SEE ALSO
 
 =over 4
