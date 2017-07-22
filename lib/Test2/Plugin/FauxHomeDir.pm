@@ -7,6 +7,7 @@ use File::Temp qw( tempdir );
 use File::Spec;
 use File::Path qw( mkpath );
 use if $^O eq 'cygwin', 'File::Spec::Win32';
+use Test2::API qw( test2_add_callback_post_load test2_stack );
 
 # ABSTRACT: Setup a faux home directory for tests
 # VERSION
@@ -116,6 +117,16 @@ sub import
     {
       $ENV{HOME} = $faux;
     }
+    
+    test2_add_callback_post_load(sub {
+      test2_stack()->top;
+      my($hub) = test2_stack->all;
+      $hub->send(
+        Test2::Event::Note->new(
+          message => $_
+        ),
+      ) for "Test2::Plugin::FauxHomeDir using faux home dir $faux", "Test2::Plugin::FauxHomeDir real home dir is    $real";
+    });
   }
 }
 
