@@ -42,12 +42,12 @@ sub import
   if($^O eq 'MSWin32')
   {
     $ENV{USERPROFILE} = $faux;
-    ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec->splitpath($faux);
+    ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec->splitpath($faux,1);
   }
   elsif($^O eq 'cygwin')
   {
     $ENV{USERPROFILE} = Cygwin::posix_to_win_path($faux);
-    ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec::Win32->splitpath($faux);
+    ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec::Win32->splitpath($ENV{USERPROFILE},1);
     $ENV{HOME} = $faux;
   }
   else
