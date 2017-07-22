@@ -5,6 +5,7 @@ use warnings;
 use 5.008001;
 use File::Temp qw( tempdir );
 use File::Spec;
+use File::Path qw( mkpath );
 use if $^O eq 'cygwin', 'File::Spec::Win32';
 
 # ABSTRACT: Setup a faux home directory for tests
@@ -38,6 +39,7 @@ sub import
   delete $ENV{HOMEPATH};
   
   $faux = File::Spec->catdir(tempdir( CLEANUP => 1 ), 'home', $user);
+  mkpath $faux, 0, 0700;
 
   if($^O eq 'MSWin32')
   {
