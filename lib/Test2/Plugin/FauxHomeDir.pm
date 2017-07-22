@@ -62,7 +62,8 @@ the very brief exception when it was broken by changes introduced in the
 Perl 5.25.x series when C<.> was removed from C<@INC>.  And it was not 
 fixed without a degree of prodding of the maintainer.  It also comes 
 bundled as part of L<File::HomeDir> which does a lot more than I really 
-need.
+need.  This module also dies if it is C<use>d more than once which I
+think is unnecessary.
 
 =back
 
@@ -74,44 +75,47 @@ my $user;
 
 sub import
 {
-  if($^O eq 'MSWin32')
+  unless(defined $faux)
   {
-    $real = $ENV{USERPROFILE};
-    $real = File::Spec->catdir($ENV{HOMEDRIVE}, $ENV{HOMEPATH})
-      unless defined $real;
-    $user = $ENV{USERNAME};
-  }
-  else
-  {
-    $real = $ENV{HOME};
-    $user = $ENV{USER};
-  }
+    if($^O eq 'MSWin32')
+    {
+      $real = $ENV{USERPROFILE};
+      $real = File::Spec->catdir($ENV{HOMEDRIVE}, $ENV{HOMEPATH})
+        unless defined $real;
+      $user = $ENV{USERNAME};
+    }
+    else
+    {
+      $real = $ENV{HOME};
+      $user = $ENV{USER};
+    }
   
-  die "unable to determine 'real' home directory"
-    unless defined $real && -d $real;
+    die "unable to determine 'real' home directory"
+      unless defined $real && -d $real;
   
-  delete $ENV{USERPROFILE};
-  delete $ENV{HOME};
-  delete $ENV{HOMEDRIVE};
-  delete $ENV{HOMEPATH};
+    delete $ENV{USERPROFILE};
+    delete $ENV{HOME};
+    delete $ENV{HOMEDRIVE};
+    delete $ENV{HOMEPATH};
   
-  $faux = File::Spec->catdir(tempdir( CLEANUP => 1 ), 'home', $user);
-  mkpath $faux, 0, 0700;
+    $faux = File::Spec->catdir(tempdir( CLEANUP => 1 ), 'home', $user);
+    mkpath $faux, 0, 0700;
 
-  if($^O eq 'MSWin32')
-  {
-    $ENV{USERPROFILE} = $faux;
-    ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec->splitpath($faux,1);
-  }
-  elsif($^O eq 'cygwin')
-  {
-    $ENV{USERPROFILE} = Cygwin::posix_to_win_path($faux);
-    ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec::Win32->splitpath($ENV{USERPROFILE},1);
-    $ENV{HOME} = $faux;
-  }
-  else
-  {
-    $ENV{HOME} = $faux;
+    if($^O eq 'MSWin32')
+    {
+      $ENV{USERPROFILE} = $faux;
+      ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec->splitpath($faux,1);
+    }
+    elsif($^O eq 'cygwin')
+    {
+      $ENV{USERPROFILE} = Cygwin::posix_to_win_path($faux);
+      ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec::Win32->splitpath($ENV{USERPROFILE},1);
+      $ENV{HOME} = $faux;
+    }
+    else
+    {
+      $ENV{HOME} = $faux;
+    }
   }
 }
 

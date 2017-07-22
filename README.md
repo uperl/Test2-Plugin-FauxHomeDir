@@ -45,7 +45,8 @@ Patches to address this will be eagerly accepted.
     Perl 5.25.x series when `.` was removed from `@INC`.  And it was not 
     fixed without a degree of prodding of the maintainer.  It also comes 
     bundled as part of [File::HomeDir](https://metacpan.org/pod/File::HomeDir) which does a lot more than I really 
-    need.
+    need.  This module also dies if it is `use`d more than once which I
+    think is unnecessary.
 
 # AUTHOR
 
