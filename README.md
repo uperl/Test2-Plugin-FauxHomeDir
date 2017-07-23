@@ -46,7 +46,7 @@ files.
 - [File::HomeDir::Test](https://metacpan.org/pod/File::HomeDir::Test)
 
     I used to use this module a lot.  It was good.  Unfortunately It has 
-    not, in this developers opinion been actively maintained for years, with 
+    not, in this developers opinion, been actively maintained for years, with 
     the very brief exception when it was broken by changes introduced in the 
     Perl 5.25.x series when `.` was removed from `@INC`. It also comes 
     bundled as part of [File::HomeDir](https://metacpan.org/pod/File::HomeDir) which does a lot more than I really 
