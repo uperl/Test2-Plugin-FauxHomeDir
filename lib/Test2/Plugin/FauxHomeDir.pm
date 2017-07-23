@@ -65,12 +65,12 @@ files.
 
 I used to use this module a lot.  It was good.  Unfortunately It has 
 not, in this developers opinion been actively maintained for years, with 
-the very brief exception when it was broken by changes introduced in the
+the very brief exception when it was broken by changes introduced in the 
 Perl 5.25.x series when C<.> was removed from C<@INC>.  And it was not 
 fixed without a degree of prodding of the maintainer.  It also comes 
 bundled as part of L<File::HomeDir> which does a lot more than I really 
-need.  This module also dies if it is C<use>d more than once which I
-think is unnecessary.
+need.  L<File::HomeDir::Test> also dies if it is C<use>d more than once 
+which I think is unnecessary.
 
 =back
 
