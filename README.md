@@ -23,6 +23,12 @@ around this faux module and getting the real home directory (especially
 from C).  But if your code uses standard Perl interfaces then this 
 plugin should fool your code okay.
 
+This module sets the native environment variables for the home directory 
+on your platform.  That means on Windows `USERPROFILE`, `HOMEDRIVE` 
+and `HOMEPATH` will be set, but `HOME` will not.  This is important 
+because your testing environment should match as closely as possible 
+what the actual environment will look like.
+
 You should load this module as early as possible.
 
 This systems are actively developed and tested:
@@ -41,6 +47,10 @@ Arguably your code shouldn't depend on or be affected by stuff in your
 home directory, or have a hook for your tests to alternate configuration 
 files.
 
+Strange things may happen if you try to use both this plugin and
+[File::HomeDir::Test](https://metacpan.org/pod/File::HomeDir::Test).  A notice or diagnostic (depending on if the
+test is passing) will be raised at the end of the test if you attempt this.
+
 # SEE ALSO
 
 - [File::HomeDir::Test](https://metacpan.org/pod/File::HomeDir::Test)
@@ -48,10 +58,19 @@ files.
     I used to use this module a lot.  It was good.  Unfortunately It has 
     not, in this developers opinion, been actively maintained for years, with 
     the very brief exception when it was broken by changes introduced in the 
-    Perl 5.25.x series when `.` was removed from `@INC`. It also comes 
-    bundled as part of [File::HomeDir](https://metacpan.org/pod/File::HomeDir) which does a lot more than I really 
-    need.  [File::HomeDir::Test](https://metacpan.org/pod/File::HomeDir::Test) also dies if it is `use`d more than once 
-    which I think is unnecessary.
+    Perl 5.25.x series when `.` was removed from `@INC`.
+
+    This module also comes bundled as part of [File::HomeDir](https://metacpan.org/pod/File::HomeDir) which does a 
+    lot more than I really need.
+
+    This module also dies if it is `use`d more than once which I think is 
+    unnecessary.
+
+    This module also sets `HOME` on all platforms, even on ones where that 
+    is not the native environment variable for the home directory.  This can 
+    be a problem, because if your code is using `HOME`, and your testing 
+    environment fakes it so that works, then your testing environment may be
+    hiding bugs.
 
 # AUTHOR
 

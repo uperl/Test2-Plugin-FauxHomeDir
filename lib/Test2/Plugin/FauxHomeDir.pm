@@ -7,7 +7,7 @@ use File::Temp qw( tempdir );
 use File::Spec;
 use File::Path qw( mkpath );
 use if $^O eq 'cygwin', 'File::Spec::Win32';
-use Test2::API qw( test2_add_callback_post_load test2_stack );
+use Test2::API qw( test2_add_callback_post_load test2_stack test2_add_callback_exit );
 
 # ABSTRACT: Setup a faux home directory for tests
 # VERSION
@@ -33,6 +33,12 @@ around this faux module and getting the real home directory (especially
 from C).  But if your code uses standard Perl interfaces then this 
 plugin should fool your code okay.
 
+This module sets the native environment variables for the home directory 
+on your platform.  That means on Windows C<USERPROFILE>, C<HOMEDRIVE> 
+and C<HOMEPATH> will be set, but C<HOME> will not.  This is important 
+because your testing environment should match as closely as possible 
+what the actual environment will look like.
+
 You should load this module as early as possible.
 
 This systems are actively developed and tested:
@@ -57,6 +63,10 @@ Arguably your code shouldn't depend on or be affected by stuff in your
 home directory, or have a hook for your tests to alternate configuration 
 files.
 
+Strange things may happen if you try to use both this plugin and
+L<File::HomeDir::Test>.  A notice or diagnostic (depending on if the
+test is passing) will be raised at the end of the test if you attempt this.
+
 =head1 SEE ALSO
 
 =over 4
@@ -66,10 +76,19 @@ files.
 I used to use this module a lot.  It was good.  Unfortunately It has 
 not, in this developers opinion, been actively maintained for years, with 
 the very brief exception when it was broken by changes introduced in the 
-Perl 5.25.x series when C<.> was removed from C<@INC>. It also comes 
-bundled as part of L<File::HomeDir> which does a lot more than I really 
-need.  L<File::HomeDir::Test> also dies if it is C<use>d more than once 
-which I think is unnecessary.
+Perl 5.25.x series when C<.> was removed from C<@INC>.
+
+This module also comes bundled as part of L<File::HomeDir> which does a 
+lot more than I really need.
+
+This module also dies if it is C<use>d more than once which I think is 
+unnecessary.
+
+This module also sets C<HOME> on all platforms, even on ones where that 
+is not the native environment variable for the home directory.  This can 
+be a problem, because if your code is using C<HOME>, and your testing 
+environment fakes it so that works, then your testing environment may be
+hiding bugs.
 
 =back
 
@@ -131,6 +150,25 @@ sub import
           message => $_
         ),
       ) for "Test2::Plugin::FauxHomeDir using faux home dir $faux", "Test2::Plugin::FauxHomeDir real home dir is    $real";
+    });
+
+    test2_add_callback_exit(sub {
+      my ($ctx, $real, $new) = @_;
+      if($INC{'File/HomeDir/Test.pm'})
+      {
+        my @message = (
+          'File::HomeDir::Test was loaded.',
+          'You probably do not want to load both File::HomeDir::Test and Test2::Plugin::FauxHomeDir',
+        );
+        if($real || ($new && $$new) || !$ctx->hub->is_passing)
+        {
+          $ctx->diag($_) for @message;
+        }
+        else
+        {
+          $ctx->note($_) for @message;
+        }
+      }
     });
   }
 }
