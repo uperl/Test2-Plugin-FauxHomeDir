@@ -48,8 +48,7 @@ files.
     I used to use this module a lot.  It was good.  Unfortunately It has 
     not, in this developers opinion been actively maintained for years, with 
     the very brief exception when it was broken by changes introduced in the 
-    Perl 5.25.x series when `.` was removed from `@INC`.  And it was not 
-    fixed without a degree of prodding of the maintainer.  It also comes 
+    Perl 5.25.x series when `.` was removed from `@INC`. It also comes 
     bundled as part of [File::HomeDir](https://metacpan.org/pod/File::HomeDir) which does a lot more than I really 
     need.  [File::HomeDir::Test](https://metacpan.org/pod/File::HomeDir::Test) also dies if it is `use`d more than once 
     which I think is unnecessary.
