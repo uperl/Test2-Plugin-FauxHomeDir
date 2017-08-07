@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Fall back on getpwuid for determining username
 
 0.02      2017-07-23 08:59:06 -0400
   - warn via either note or diag (depending on if the test fails) if

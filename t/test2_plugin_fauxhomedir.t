@@ -11,7 +11,7 @@ my $user = defined $ENV{USER}
   ? $ENV{USER}
   : defined $ENV{USERNAME}
     ? $ENV{USERNAME}
-    : undef;
+    : eval { scalar getpwuid($>) };
 
 bail_out 'no HOME or USERPROFILE' unless $faux;
 bail_out 'no USER or USERNAME' unless $user;
