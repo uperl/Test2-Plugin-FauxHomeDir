@@ -114,12 +114,9 @@ sub import
       $real = $ENV{HOME};
       $user = $ENV{USER};
     }
-    
-    unless(defined $user)
-    {
-      $user = eval { scalar getpwuid($>) };
-    }
-    
+
+    $user = eval { getlogin } unless defined $user;
+    $user = eval { scalar getpwuid($>) } unless defined $user;
     die "unable to determine username" unless defined $user;
   
     die "unable to determine 'real' home directory"
