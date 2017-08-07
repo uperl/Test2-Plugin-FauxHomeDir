@@ -119,6 +119,8 @@ sub import
     {
       $user = eval { scalar getpwuid($>) };
     }
+    
+    die "unable to determine username" unless defined $user;
   
     die "unable to determine 'real' home directory"
       unless defined $real && -d $real;
