@@ -45,8 +45,8 @@ Patches to address this will be eagerly accepted.
 
 ## real\_home\_dir
 
-Returns the real home directory as detected during initilzation.  If
-initilization hasn't happened then this will return `undef`.
+Returns the real home directory as detected during startup.  If
+initialization hasn't happened then this will return `undef`.
 
 # CAVEATS
 

@@ -61,8 +61,8 @@ Patches to address this will be eagerly accepted.
 
 =head2 real_home_dir
 
-Returns the real home directory as detected during initilzation.  If
-initilization hasn't happened then this will return C<undef>.
+Returns the real home directory as detected during startup.  If
+initialization hasn't happened then this will return C<undef>.
 
 =head1 CAVEATS
 
