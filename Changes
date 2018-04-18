@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Add real_home_dir method
+    mildly begrudgingly
 
 0.03      2017-08-07 15:52:03 -0400
   - Fall back on getlogin or getpwuid for determining username

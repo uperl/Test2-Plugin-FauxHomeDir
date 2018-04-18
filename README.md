@@ -41,6 +41,13 @@ I expect that it should work on most other modern UNIX platforms.  It
 probably will not work on more esoteric systems like VMS or msys2.  
 Patches to address this will be eagerly accepted.
 
+# METHODS
+
+## real\_home\_dir
+
+Returns the real home directory as detected during initilzation.  If
+initilization hasn't happened then this will return `undef`.
+
 # CAVEATS
 
 Arguably your code shouldn't depend on or be affected by stuff in your 

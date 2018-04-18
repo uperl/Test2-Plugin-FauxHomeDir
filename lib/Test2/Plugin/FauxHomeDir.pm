@@ -57,6 +57,13 @@ I expect that it should work on most other modern UNIX platforms.  It
 probably will not work on more esoteric systems like VMS or msys2.  
 Patches to address this will be eagerly accepted.
 
+=head1 METHODS
+
+=head2 real_home_dir
+
+Returns the real home directory as detected during initilzation.  If
+initilization hasn't happened then this will return C<undef>.
+
 =head1 CAVEATS
 
 Arguably your code shouldn't depend on or be affected by stuff in your 
@@ -97,6 +104,11 @@ hiding bugs.
 my $real;
 my $faux;
 my $user;
+
+sub real_home_dir
+{
+  $real;
+}
 
 sub import
 {
