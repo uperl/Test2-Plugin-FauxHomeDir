@@ -154,8 +154,11 @@ sub import
         push @notes, "Portable strawberry detected";
         if(eval { require File::HomeDir })
         {
+          # annoyingly, Strawberry Portable Perl patches
+          # File::HomeDir, but not things like File::Glob
+          # so since there isn't a good interface to override
+          # this behavior, we need to patch the patch :(
           push @notes, "Patching File::HomeDir";
-          require File::HomeDir;
           require Test2::Mock;
           push @mocks, Test2::Mock->new(
             class => 'File::HomeDir',
