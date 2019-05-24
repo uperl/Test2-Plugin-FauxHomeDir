@@ -1,7 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
-  - Patch the patched File::HomeDir that is patched by Portable Strawberry Perl on windows.
+  - Patch the patched File::HomeDir that is patched by Portable Strawberry Perl on windows
+    (gh#2, gh#4)
+  - Better diagnostics when things fail (gh#3 shawnlaffan++)
 
 0.04      2018-04-18 12:46:06 -0400
   - Add real_home_dir method
