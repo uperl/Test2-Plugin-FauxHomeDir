@@ -104,6 +104,7 @@ hiding bugs.
 my $real;
 my $faux;
 my $user;
+my @mocks;
 
 sub real_home_dir
 {
@@ -112,6 +113,8 @@ sub real_home_dir
 
 sub import
 {
+  my @notes;
+
   unless(defined $faux)
   {
     if($^O eq 'MSWin32')
@@ -146,6 +149,22 @@ sub import
     {
       $ENV{USERPROFILE} = $faux;
       ($ENV{HOMEDRIVE}, $ENV{HOMEPATH}) = File::Spec->splitpath($faux,1);
+      if(eval { require Portable })
+      {
+        push @notes, "Portable strawberry detected";
+        if(eval { require File::HomeDir })
+        {
+          push @notes, "Patching File::HomeDir";
+          require File::HomeDir;
+          require Test2::Mock;
+          push @mocks, Test2::Mock->new(
+            class => 'File::HomeDir',
+            override => [
+              my_home => sub { $faux },
+            ],
+          );
+        }
+      }
     }
     elsif($^O eq 'cygwin')
     {
@@ -157,6 +176,9 @@ sub import
     {
       $ENV{HOME} = $faux;
     }
+
+    push @notes, "Test2::Plugin::FauxHomeDir using faux home dir $faux";
+    push @notes, "Test2::Plugin::FauxHomeDir real home dir is    $real";
     
     test2_add_callback_post_load(sub {
       test2_stack()->top;
@@ -165,7 +187,7 @@ sub import
         Test2::Event::Note->new(
           message => $_
         ),
-      ) for "Test2::Plugin::FauxHomeDir using faux home dir $faux", "Test2::Plugin::FauxHomeDir real home dir is    $real";
+      ) for @notes;
     });
 
     test2_add_callback_exit(sub {
