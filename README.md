@@ -81,7 +81,11 @@ test is passing) will be raised at the end of the test if you attempt this.
 
 # AUTHOR
 
-Graham Ollis <plicease@cpan.org>
+Author: Graham Ollis <plicease@cpan.org>
+
+Contributors:
+
+Shawn Laffan (SLAFFAN)
 
 # COPYRIGHT AND LICENSE
 
