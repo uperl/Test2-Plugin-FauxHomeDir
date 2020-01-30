@@ -25,6 +25,9 @@ subtest 'File::Glob' => sub {
   skip_all 'test requires File::Glob'
     unless eval q{ require File::Glob };
   
+  skip_all 'File::Glob on older windows do not handle ~'
+    if $^O eq 'MSWin32' && !-d File::Glob::bsd_glob('~');
+
   my $filename = File::Glob::bsd_glob('~/test.txt');
   ok -f $filename;
   note "filename = $filename";
@@ -39,6 +42,9 @@ subtest 'Path::Tiny' => sub {
 
   skip_all 'test requires Path::Tiny'
     unless eval q{ require Path::Tiny };
+
+  skip_all 'File::Glob on older windows do not handle ~'
+    if $^O eq 'MSWin32' && !-d File::Glob::bsd_glob('~');
   
   my $path = Path::Tiny->new('~/test.txt');
   
