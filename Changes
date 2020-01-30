@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.06      2020-01-30 10:44:08 -0700
   - Test fixes for Windows Perl 5.14 and earlier which come bundled with
     a File::Glob that cannot handle ~ (gh#1, gh#5)
 
