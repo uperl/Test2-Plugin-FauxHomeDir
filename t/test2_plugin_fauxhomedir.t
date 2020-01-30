@@ -24,7 +24,7 @@ subtest 'File::Glob' => sub {
 
   skip_all 'test requires File::Glob'
     unless eval q{ require File::Glob };
-  
+
   skip_all 'File::Glob on older windows do not handle ~'
     if $^O eq 'MSWin32' && !-d File::Glob::bsd_glob('~');
 
@@ -45,9 +45,9 @@ subtest 'Path::Tiny' => sub {
 
   skip_all 'File::Glob on older windows do not handle ~'
     if $^O eq 'MSWin32' && !-d File::Glob::bsd_glob('~');
-  
+
   my $path = Path::Tiny->new('~/test.txt');
-  
+
   ok -f $path;
   is $path->slurp, "xx\n";
 
@@ -61,12 +61,12 @@ subtest 'File::HomeDir' => sub {
   my $filename = File::Spec->catfile(File::HomeDir->my_home, 'test.txt');
 
   ok -f $filename;
-  
+
   open my $fh, '<', $filename or die "Unable to open $filename, $!";
   my $data = do { local $/; <$fh> };
   close $fh;
-  
-  is $data, "xx\n";  
+
+  is $data, "xx\n";
 };
 
 subtest 'real_home_dir' => sub {
