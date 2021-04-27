@@ -143,7 +143,7 @@ sub import
     delete $ENV{HOMEPATH};
 
     $faux = File::Spec->catdir(tempdir( CLEANUP => 1 ), 'home', $user);
-    mkpath $faux, 0, 0700;
+    mkpath $faux, 0, oct('700');
 
     if($^O eq 'MSWin32')
     {

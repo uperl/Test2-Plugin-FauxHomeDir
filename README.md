@@ -1,4 +1,4 @@
-# Test2::Plugin::FauxHomeDir [![Build Status](https://secure.travis-ci.org/plicease/Test2-Plugin-FauxHomeDir.png)](http://travis-ci.org/plicease/Test2-Plugin-FauxHomeDir)
+# Test2::Plugin::FauxHomeDir ![linux](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/msys2-mingw/badge.svg)
 
 Setup a faux home directory for tests
 
