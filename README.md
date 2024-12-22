@@ -1,4 +1,4 @@
-# Test2::Plugin::FauxHomeDir ![linux](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/windows/badge.svg) ![cygwin](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/msys2-mingw/badge.svg)
+# Test2::Plugin::FauxHomeDir ![linux](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/msys2-mingw/badge.svg)
 
 Setup a faux home directory for tests
 
@@ -91,7 +91,7 @@ Shawn Laffan (SLAFFAN)
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2017 by Graham Ollis.
+This software is copyright (c) 2017-2024 by Graham Ollis.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

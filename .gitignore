@@ -1,2 +1,4 @@
 /Test2-Plugin-FauxHomeDir-*
 /.build
+*.old
+*.orig
