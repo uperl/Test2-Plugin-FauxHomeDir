@@ -1,4 +1,4 @@
-# Test2::Plugin::FauxHomeDir ![linux](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/windows/badge.svg) ![msys2-mingw](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/msys2-mingw/badge.svg)
+# Test2::Plugin::FauxHomeDir ![linux](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/linux/badge.svg) ![macos](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/macos/badge.svg) ![windows](https://github.com/uperl/Test2-Plugin-FauxHomeDir/workflows/windows/badge.svg)
 
 Setup a faux home directory for tests
 
